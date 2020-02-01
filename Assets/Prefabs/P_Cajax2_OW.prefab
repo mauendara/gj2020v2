@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 58684a4befbcf2b4390927f0c973d630, type: 2}
+    - target: {fileID: 191098943, guid: 2552bade11f25444dbd802ea33992723, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9072026894861746459, guid: 2552bade11f25444dbd802ea33992723,
         type: 3}
       propertyPath: m_LocalPosition.x
