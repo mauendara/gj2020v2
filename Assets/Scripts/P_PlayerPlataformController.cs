@@ -102,6 +102,10 @@ public class P_PlayerPlataformController : P_PhysicsObject {
             rb2d.AddForce(new Vector2(0, 15), ForceMode2D.Impulse);
             Destroy(col.gameObject);
 		}
+        if (col.gameObject.tag.Equals("DeadZone"))
+        {
+            SceneManager.LoadScene("ira");
+        }
 	}
 	void OnTriggerExit2D(Collider2D col)
 	{
