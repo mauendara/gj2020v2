@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - DeadZone
+  - proyectilDamage
+  - Item
+  - Exit
   layers:
   - Default
   - TransparentFX
