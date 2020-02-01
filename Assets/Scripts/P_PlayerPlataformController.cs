@@ -8,6 +8,7 @@ public class P_PlayerPlataformController : P_PhysicsObject {
 
 	private SpriteRenderer spriteRenderer;
 	private Animator animator;
+    public Light ligth;
 
 	private Vector3 initialPosition;
 
@@ -17,6 +18,7 @@ public class P_PlayerPlataformController : P_PhysicsObject {
 		spriteRenderer = GetComponent<SpriteRenderer> (); 
 		animator = GetComponent<Animator> ();
 		initialPosition = GetComponent<Rigidbody2D>().transform.position ;
+        //ligth = GetComponent<Light> ();
 
 	}
 
@@ -39,10 +41,12 @@ public class P_PlayerPlataformController : P_PhysicsObject {
 		if (move.x < 0) 
 		{
             spriteRenderer.flipX = true;
+			ligth.transform.eulerAngles = new Vector3 (0, -90, 0);
         }
         else if (move.x > 0)
         {
             spriteRenderer.flipX = false;
+			ligth.transform.eulerAngles = new Vector3 (0, 90, 0);
         } 
 		animator.SetBool ("grounded", grounded);
 		animator.SetBool ("runnin", Mathf.Abs (velocity.x)!=0);
