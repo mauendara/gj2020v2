@@ -9,7 +9,13 @@ public class PickUpItemScript : MonoBehaviour
     public float throwForce = 10;
     private bool isPlayerOver = false;
     private bool isBeingCarried = false;
+    public bool isFire = false;
 
+    private float posicionInicial;
+
+    public float velocidad = 5;
+    private Rigidbody2D rb;
+    private SpriteRenderer sp;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,6 +31,8 @@ public class PickUpItemScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        sp = GameObject.FindWithTag("Player").GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,13 +40,25 @@ public class PickUpItemScript : MonoBehaviour
     {
         if (isBeingCarried)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 GetComponent<Rigidbody2D>().isKinematic = false;
                 transform.parent = null;
                 isBeingCarried = false;
                 GetComponent<Rigidbody2D>().AddForce(player.forward * throwForce);
-                Debug.Log("Droping");
+
+            }
+            if (Input.GetKeyDown(KeyCode.G)&& isFire)
+            {
+                if (sp.flipX)
+                {
+                    velocidad = velocidad * -1;
+                }
+                GetComponent<Rigidbody2D>().isKinematic = false;
+                transform.parent = null;
+                isBeingCarried = false;
+                GetComponent<Rigidbody2D>().velocity = transform.right * velocidad;
+                posicionInicial = transform.position.x;
             }
         }
         else
@@ -48,8 +68,18 @@ public class PickUpItemScript : MonoBehaviour
                 GetComponent<Rigidbody2D>().isKinematic = true;
                 transform.parent = player;
                 isBeingCarried = true;
-                Debug.Log("Picking up");
             }
+
         }
+
+        if (transform.position.x > posicionInicial + 20 && velocidad > 0)
+        {
+            Destroy(gameObject);
+        }
+        else if (transform.position.x < posicionInicial - 20 && velocidad < 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
