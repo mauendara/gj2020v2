@@ -8,10 +8,12 @@ public class BossController : MonoBehaviour
 
     private bool jumpside = true;
     private Rigidbody2D rb;
+    private Transform transform;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        transform = GetComponent<Transform> ();
     }
 
     // Update is called once per frame
@@ -52,5 +54,17 @@ public class BossController : MonoBehaviour
     private void JumpRigth()
     {
         rb.AddForce(new Vector2(xforce, jumpForce));
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag.Equals("proyectilDamage"))
+        {
+            transform.localScale += new Vector3(0.1F, 0.1F, 0);
+        }
+        if (col.gameObject.tag.Equals("proyectilNoDamage"))
+        {
+            transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+        }
     }
 }
