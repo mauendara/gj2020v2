@@ -11,6 +11,8 @@ public class BossController : MonoBehaviour
     public float bossThrowX = 1f;
     public float bossThrowY = 4f;
 
+    private bool isChasing = true;
+    private int aquireRate = 5;
     private Rigidbody2D rb;
     private Transform target;
 
@@ -21,24 +23,27 @@ public class BossController : MonoBehaviour
         exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript> ();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        //StartCoroutine("WaitToAttack");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(target == null)
+        if (isChasing)
         {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
+            if (playerDistanceMagnitude <= playerTriggerDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
+            }
+            if (playerDistanceMagnitude <= 5)
+            {
+                Vector3 throwForce = target.position.x - transform.position.x <= 0 ? new Vector3(-bossThrowX, bossThrowY, 0f) : new Vector3(bossThrowX, bossThrowY, 0f);
+                target.GetComponent<Rigidbody2D>().AddForce(throwForce);
+                isChasing = false;
+            }
         }
-        float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
-        if (playerDistanceMagnitude <= playerTriggerDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
-        }
-        if (playerDistanceMagnitude <= 5)
-        {
-            target.GetComponent<Rigidbody2D>().AddForce(transform.position - new Vector3(bossThrowX, bossThrowY, 0f));
-        }
+        
     }
 
     private void JumpLeft()
@@ -86,18 +91,29 @@ public class BossController : MonoBehaviour
         {
             transform.gameObject.SetActive(false);
         }
-        else if (col.gameObject.tag.Equals("bossPlataformL"))
+        if (col.gameObject.tag.Equals("bossPlataformL"))
         {
             JumpLeft();
         }
-        else if (col.gameObject.tag.Equals("bossPlataformR"))
+        if (col.gameObject.tag.Equals("bossPlataformR"))
         {
             JumpRigth();
         }
-        else if (col.gameObject.tag.Equals("Player"))
-        {
-            
-        }
 
     }
+
+    //private IEnumerator WaitToAttack()
+    //{
+    //    while (true)
+    //    {
+    //        if (!isChasing)
+    //        {
+    //            Debug.Log("Stop Chasing");
+    //            yield return new WaitForSeconds(aquireRate);
+    //            isChasing = true;
+    //            Debug.Log("Start Chasing");
+    //        }
+    //    }
+        
+    //}
 }
