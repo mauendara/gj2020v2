@@ -9,7 +9,9 @@ public class ItemRecieverScript : MonoBehaviour
     int isOverExpectedObject;
     private Transform player;
     private GameObject exit;
+    private Text msg_box;
     public bool hasRecievedItem;
+    public string text;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,7 @@ public class ItemRecieverScript : MonoBehaviour
         hasRecievedItem = false;
         player = GameObject.FindWithTag("Player").transform;
         exit = GameObject.FindGameObjectWithTag("Exit");
+        msg_box = GameObject.FindWithTag("msg_text").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -29,6 +32,7 @@ public class ItemRecieverScript : MonoBehaviour
             hasRecievedItem = true;
             isOverExpectedObject++;
             exit.GetComponent<ExitProcessScript>().numberOfChecks++;
+
             //IfPossibleGiveObjectToPlayer
             try {
                 transform.GetChild(0).GetComponent<PickUpItemScript>().isBeingCarried = true;
@@ -44,6 +48,8 @@ public class ItemRecieverScript : MonoBehaviour
         {
             isOverExpectedObject = 1;
         }
+        msg_box.text = text;
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -51,5 +57,7 @@ public class ItemRecieverScript : MonoBehaviour
         {
             isOverExpectedObject = 0;
         }
+        msg_box.text = "";
     }
 }
+  
