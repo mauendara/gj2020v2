@@ -21,12 +21,19 @@ public class PickUpItemScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        isPlayerOver = true;
+        if (collision.gameObject.tag == "Player")
+        {
+            isPlayerOver = true;
+        }
+        
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        isPlayerOver = false;
+        if (collision.gameObject.tag == "Player")
+        {
+            isPlayerOver = false;
+        }
     }
 
 

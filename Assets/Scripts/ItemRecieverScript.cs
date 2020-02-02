@@ -22,6 +22,7 @@ public class ItemRecieverScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isOverExpectedObject);
         if (isOverExpectedObject==1 && Input.GetKeyDown(KeyCode.E))
         {
             //RecieveObject
