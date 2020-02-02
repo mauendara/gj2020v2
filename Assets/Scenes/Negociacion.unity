@@ -1818,7 +1818,12 @@ PrefabInstance:
     - target: {fileID: 3043643606985912657, guid: b39b3ec52d1becb438b49a8496083a77,
         type: 3}
       propertyPath: maxChecksExpected
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043643606985912657, guid: b39b3ec52d1becb438b49a8496083a77,
+        type: 3}
+      propertyPath: nextScene
+      value: Depresion
       objectReference: {fileID: 0}
     - target: {fileID: 3043643606985912659, guid: b39b3ec52d1becb438b49a8496083a77,
         type: 3}
