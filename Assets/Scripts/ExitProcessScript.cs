@@ -38,7 +38,6 @@ public class ExitProcessScript : MonoBehaviour
         
         if (isPlayerOver)
         {
-            Debug.Log(nextScene);
             if (Input.GetKeyDown(KeyCode.R)&&numberOfChecks==maxChecksExpected)
             {
                 //Change scene
