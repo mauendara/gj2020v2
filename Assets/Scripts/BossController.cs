@@ -12,7 +12,7 @@ public class BossController : MonoBehaviour
     public float bossThrowY = 4f;
 
     private bool isChasing = true;
-    private int aquireRate = 5;
+    private float aquireRate = 0.65f;
     private Rigidbody2D rb;
     private Transform target;
 
@@ -20,30 +20,33 @@ public class BossController : MonoBehaviour
     private ExitProcessScript exitProcessScript;
     void Start()
     {
-        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript> ();
+        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        //StartCoroutine("WaitToAttack");
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isChasing)
+        float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
+        if (playerDistanceMagnitude <= playerTriggerDistance && isChasing)
         {
-            float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
-            if (playerDistanceMagnitude <= playerTriggerDistance)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
-            }
-            if (playerDistanceMagnitude <= 5)
-            {
-                Vector3 throwForce = target.position.x - transform.position.x <= 0 ? new Vector3(-bossThrowX, bossThrowY, 0f) : new Vector3(bossThrowX, bossThrowY, 0f);
-                target.GetComponent<Rigidbody2D>().AddForce(throwForce);
-                isChasing = false;
-            }
+            transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
         }
-        
+        if (playerDistanceMagnitude <= 3)
+        {
+            Vector3 throwForce = target.position.x - transform.position.x <= 0 ? new Vector3(-bossThrowX, bossThrowY, 0f) : new Vector3(bossThrowX, bossThrowY, 0f);
+            target.GetComponent<Rigidbody2D>().AddForce(throwForce);
+            transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(-throwForce.x*0.55f, throwForce.y*0.5f));
+            if (isChasing)
+            {
+                isChasing = false;
+                StartCoroutine(WaitToAttack());
+            }
+
+        }
+
     }
 
     private void JumpLeft()
@@ -102,18 +105,14 @@ public class BossController : MonoBehaviour
 
     }
 
-    //private IEnumerator WaitToAttack()
-    //{
-    //    while (true)
-    //    {
-    //        if (!isChasing)
-    //        {
-    //            Debug.Log("Stop Chasing");
-    //            yield return new WaitForSeconds(aquireRate);
-    //            isChasing = true;
-    //            Debug.Log("Start Chasing");
-    //        }
-    //    }
-        
-    //}
+    private IEnumerator WaitToAttack()
+    {
+
+        if (!isChasing)
+        {
+            yield return new WaitForSeconds(aquireRate);
+            isChasing = true;
+        }
+
+    }
 }
