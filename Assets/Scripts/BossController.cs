@@ -67,11 +67,13 @@ public class BossController : MonoBehaviour
         {
             if (HP > 0)
             {
+                Destroy(col.gameObject);
                 HP--;
                 transform.localScale -= new Vector3(0.1F, 0.1F, 0);
             }
             else if (HP == 0)
             {
+                Destroy(col.gameObject);
                 transform.gameObject.SetActive(false);
                 exitProcessScript.nextScene = "Negociacion";
                 Debug.Log(exitProcessScript.nextScene);
