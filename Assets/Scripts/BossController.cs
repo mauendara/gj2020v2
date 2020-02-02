@@ -5,45 +5,46 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     public float jumpForce, jumpCD, jump, xforce;
+    public int HP = 5;
+    public float playerTriggerDistance = 0f;
+    public float bossSpeed = 5f;
+    public float bossThrowX = 1f;
+    public float bossThrowY = 4f;
 
-    private bool jumpside = true;
+    private bool isChasing = true;
+    private float aquireRate = 0.65f;
     private Rigidbody2D rb;
-    private Transform transform;
+    private Transform target;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform> ();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        jump = jump - Time.deltaTime;
-        if (rb.velocity.y == 0)
+        float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
+        if (playerDistanceMagnitude <= playerTriggerDistance && isChasing)
         {
-            rb.velocity = Vector2.zero;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
         }
-        else
+        if (playerDistanceMagnitude <= 3)
         {
-            jump = jumpCD;
-        }
-        if (jump < 0 && rb.velocity.y == 0)
-        {
-            if (jumpside)
+            Vector3 throwForce = target.position.x - transform.position.x <= 0 ? new Vector3(-bossThrowX, bossThrowY, 0f) : new Vector3(bossThrowX, bossThrowY, 0f);
+            target.GetComponent<Rigidbody2D>().AddForce(throwForce);
+            transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(-throwForce.x*0.55f, throwForce.y*0.5f));
+            if (isChasing)
             {
-                jumpside = false;
-                JumpRigth();
-
+                isChasing = false;
+                StartCoroutine(WaitToAttack());
             }
-            else
-            {
-                jumpside = true;
-                JumpLeft();
 
-            }
-            jump = jumpCD;
         }
+
     }
 
     private void JumpLeft()
@@ -58,13 +59,56 @@ public class BossController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag.Equals("proyectilDamage"))
-        {
-            transform.localScale += new Vector3(0.1F, 0.1F, 0);
-        }
         if (col.gameObject.tag.Equals("proyectilNoDamage"))
         {
-            transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+            if (HP < 8)
+            {
+                HP++;
+                transform.localScale += new Vector3(0.1F, 0.1F, 0);
+            }
+            else
+            {
+                transform.gameObject.SetActive(false);
+                
+            }
         }
+        if (col.gameObject.tag.Equals("proyectilDamage"))
+        {
+            if (HP > 0)
+            {
+                Destroy(col.gameObject);
+                HP--;
+                transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+            }
+            else if (HP == 0)
+            {
+                Destroy(col.gameObject);
+                transform.gameObject.SetActive(false);
+            }
+        }
+        if (col.gameObject.tag.Equals("proyectilDestroy"))
+        {
+            transform.gameObject.SetActive(false);
+        }
+        if (col.gameObject.tag.Equals("bossPlataformL"))
+        {
+            JumpLeft();
+        }
+        if (col.gameObject.tag.Equals("bossPlataformR"))
+        {
+            JumpRigth();
+        }
+
+    }
+
+    private IEnumerator WaitToAttack()
+    {
+
+        if (!isChasing)
+        {
+            yield return new WaitForSeconds(aquireRate);
+            isChasing = true;
+        }
+
     }
 }

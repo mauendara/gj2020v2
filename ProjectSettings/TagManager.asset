@@ -8,6 +8,13 @@ TagManager:
   - proyectilDamage
   - Item
   - Exit
+  - bossPlataformR
+  - bossPlataformL
+  - bossPlataform
+  - proyectilNoDamage
+  - proyectilDestroy
+  - P_enemy
+  - Elevator
   layers:
   - Default
   - TransparentFX

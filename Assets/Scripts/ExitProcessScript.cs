@@ -32,12 +32,12 @@ public class ExitProcessScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         if (isPlayerOver)
         {
-            Debug.Log(Input.GetKeyDown(KeyCode.R));
+            Debug.Log(nextScene);
             if (Input.GetKeyDown(KeyCode.R)&&numberOfChecks==maxChecksExpected)
             {
                 //Change scene
