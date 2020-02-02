@@ -1,30 +1,30 @@
 fileFormatVersion: 2
-guid: 2e9fb98dddefdb34083de4a85799b904
+guid: 1c548fc031e2f6d44a4b4b263880762a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 21300000
+      213: 2894993654559457044
     second: FOX_RUN_0
   - first:
-      213: 21300002
+      213: -1654957152388330659
     second: FOX_RUN_1
   - first:
-      213: 21300004
+      213: -6498327921551875810
     second: FOX_RUN_2
   - first:
-      213: 21300006
+      213: 647858489931670389
     second: FOX_RUN_3
   - first:
-      213: 21300008
+      213: 2740579828168691107
     second: FOX_RUN_4
   - first:
-      213: 21300010
+      213: -7838676420354423039
     second: FOX_RUN_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -45,12 +45,12 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 16
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -63,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -88,6 +88,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -95,19 +107,19 @@ TextureImporter:
       name: FOX_RUN_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 100
-      alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+        x: 7
+        y: 28
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 02305410000000000800000000000000
-      internalID: 21300000
+      spriteID: 41fb607f3651d2820800000000000000
+      internalID: 2894993654559457044
       vertices: []
       indices: 
       edges: []
@@ -116,19 +128,19 @@ TextureImporter:
       name: FOX_RUN_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 100
-        height: 100
-      alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+        x: 115
+        y: 21
+        width: 37
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 22305410000000000800000000000000
-      internalID: 21300002
+      spriteID: d5bc66dfc396809e0800000000000000
+      internalID: -1654957152388330659
       vertices: []
       indices: 
       edges: []
@@ -137,19 +149,19 @@ TextureImporter:
       name: FOX_RUN_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 100
-        height: 100
-      alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+        x: 204
+        y: 21
+        width: 51
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 42305410000000000800000000000000
-      internalID: 21300004
+      spriteID: e11e5e95f2d41d5a0800000000000000
+      internalID: -6498327921551875810
       vertices: []
       indices: 
       edges: []
@@ -158,19 +170,19 @@ TextureImporter:
       name: FOX_RUN_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 100
-        height: 100
-      alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+        x: 302
+        y: 29
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 62305410000000000800000000000000
-      internalID: 21300006
+      spriteID: 57329153dd7adf800800000000000000
+      internalID: 647858489931670389
       vertices: []
       indices: 
       edges: []
@@ -179,19 +191,19 @@ TextureImporter:
       name: FOX_RUN_4
       rect:
         serializedVersion: 2
-        x: 400
-        y: 0
-        width: 100
-        height: 100
-      alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+        x: 404
+        y: 21
+        width: 53
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 82305410000000000800000000000000
-      internalID: 21300008
+      spriteID: 3ad889065de780620800000000000000
+      internalID: 2740579828168691107
       vertices: []
       indices: 
       edges: []
@@ -200,19 +212,19 @@ TextureImporter:
       name: FOX_RUN_5
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 100
-      alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+        x: 507
+        y: 20
+        width: 47
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a2305410000000000800000000000000
-      internalID: 21300010
+      spriteID: 1074b87a35d673390800000000000000
+      internalID: -7838676420354423039
       vertices: []
       indices: 
       edges: []
@@ -220,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

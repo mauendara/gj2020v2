@@ -5,15 +5,17 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     public float jumpForce, jumpCD, jump, xforce;
-
+    public int HP = 5;
     private bool jumpside = true;
     private Rigidbody2D rb;
     private Transform transform;
     // Start is called before the first frame update
+    private ExitProcessScript exitProcessScript;
     void Start()
     {
+        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript> ();
         rb = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform> ();
+        transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -58,13 +60,36 @@ public class BossController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag.Equals("proyectilDamage"))
-        {
-            transform.localScale += new Vector3(0.1F, 0.1F, 0);
-        }
         if (col.gameObject.tag.Equals("proyectilNoDamage"))
         {
-            transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+            if (HP < 8)
+            {
+                HP++;
+                transform.localScale += new Vector3(0.1F, 0.1F, 0);
+            }
+            else
+            {
+                transform.gameObject.SetActive(false);
+                exitProcessScript.nextScene = "Negacion";
+            }
+        }
+        if (col.gameObject.tag.Equals("proyectilDamage"))
+        {
+            if (HP > 0)
+            {
+                HP--;
+                transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+            }
+            else if (HP == 0)
+            {
+                transform.gameObject.SetActive(false);
+                exitProcessScript.nextScene = "Negociacion";
+                Debug.Log(exitProcessScript.nextScene);
+            }
+        }
+        if (col.gameObject.tag.Equals("proyectilDestroy"))
+        {
+            transform.gameObject.SetActive(false);
         }
     }
 }

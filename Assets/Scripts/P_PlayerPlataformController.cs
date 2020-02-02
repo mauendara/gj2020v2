@@ -93,7 +93,7 @@ public class P_PlayerPlataformController : P_PhysicsObject {
 	{
         if (col.gameObject.tag.Equals("P_projectile") || col.gameObject.tag.Equals("P_enemy"))
         {
-			rb2d.transform.position = initialPosition;
+			//rb2d.transform.position = initialPosition;
 			animator.SetBool ("hurt", true);
 			rb2d.AddForce (new Vector2 (-4, 3), ForceMode2D.Impulse);
 		}
@@ -104,7 +104,7 @@ public class P_PlayerPlataformController : P_PhysicsObject {
 		}
         if (col.gameObject.tag.Equals("DeadZone"))
         {
-            SceneManager.LoadScene("ira");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 	}
 	void OnTriggerExit2D(Collider2D col)

@@ -8,6 +8,9 @@ TagManager:
   - proyectilDamage
   - Item
   - Exit
+  - proyectilNoDamage
+  - proyectilDestroy
+  - P_enemy
   layers:
   - Default
   - TransparentFX
