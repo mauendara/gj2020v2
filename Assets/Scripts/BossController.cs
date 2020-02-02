@@ -11,31 +11,40 @@ public class BossController : MonoBehaviour
     public float bossThrowX = 1f;
     public float bossThrowY = 4f;
 
-    private bool jumpside = true;
+    private bool isChasing = true;
+    private float aquireRate = 0.65f;
     private Rigidbody2D rb;
     private Transform target;
 
     // Start is called before the first frame update
-    private ExitProcessScript exitProcessScript;
     void Start()
     {
-        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript> ();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
-        if (playerDistanceMagnitude <= playerTriggerDistance)
+        if (playerDistanceMagnitude <= playerTriggerDistance && isChasing)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
         }
-        if (playerDistanceMagnitude <= 5)
+        if (playerDistanceMagnitude <= 3)
         {
-            target.GetComponent<Rigidbody2D>().AddForce(transform.position - new Vector3(bossThrowX, bossThrowY, 0f));
+            Vector3 throwForce = target.position.x - transform.position.x <= 0 ? new Vector3(-bossThrowX, bossThrowY, 0f) : new Vector3(bossThrowX, bossThrowY, 0f);
+            target.GetComponent<Rigidbody2D>().AddForce(throwForce);
+            transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(-throwForce.x*0.55f, throwForce.y*0.5f));
+            if (isChasing)
+            {
+                isChasing = false;
+                StartCoroutine(WaitToAttack());
+            }
+
         }
+
     }
 
     private void JumpLeft()
@@ -60,7 +69,7 @@ public class BossController : MonoBehaviour
             else
             {
                 transform.gameObject.SetActive(false);
-                exitProcessScript.nextScene = "Negacion";
+                
             }
         }
         if (col.gameObject.tag.Equals("proyectilDamage"))
@@ -75,21 +84,30 @@ public class BossController : MonoBehaviour
             {
                 Destroy(col.gameObject);
                 transform.gameObject.SetActive(false);
-                exitProcessScript.nextScene = "Negociacion";
-                Debug.Log(exitProcessScript.nextScene);
             }
         }
         if (col.gameObject.tag.Equals("proyectilDestroy"))
         {
             transform.gameObject.SetActive(false);
         }
-        else if (col.gameObject.tag.Equals("bossPlataformL"))
+        if (col.gameObject.tag.Equals("bossPlataformL"))
+        {
+            JumpLeft();
+        }
+        if (col.gameObject.tag.Equals("bossPlataformR"))
         {
             JumpRigth();
         }
-        else if (col.gameObject.tag.Equals("bossPlataformR"))
+
+    }
+
+    private IEnumerator WaitToAttack()
+    {
+
+        if (!isChasing)
         {
-            JumpLeft();
+            yield return new WaitForSeconds(aquireRate);
+            isChasing = true;
         }
 
     }

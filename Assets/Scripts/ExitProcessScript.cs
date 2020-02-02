@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class ExitProcessScript : MonoBehaviour
 {
-    public string nextScene;
-    public int maxChecksExpected;
+    [SerializeField] string nextScene;
+    [SerializeField] int maxChecksExpected;
     private bool isPlayerOver;
     public int numberOfChecks;
 
-    public ExitProcessScript instant;
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
