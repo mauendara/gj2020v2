@@ -26,6 +26,10 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
         if (playerDistanceMagnitude <= playerTriggerDistance)
         {
