@@ -16,10 +16,9 @@ public class BossController : MonoBehaviour
     private Transform target;
 
     // Start is called before the first frame update
-    private ExitProcessScript exitProcessScript;
     void Start()
     {
-        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript> ();
+        
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -60,7 +59,7 @@ public class BossController : MonoBehaviour
             else
             {
                 transform.gameObject.SetActive(false);
-                exitProcessScript.nextScene = "Negacion";
+                
             }
         }
         if (col.gameObject.tag.Equals("proyectilDamage"))
@@ -75,8 +74,6 @@ public class BossController : MonoBehaviour
             {
                 Destroy(col.gameObject);
                 transform.gameObject.SetActive(false);
-                exitProcessScript.nextScene = "Negociacion";
-                Debug.Log(exitProcessScript.nextScene);
             }
         }
         if (col.gameObject.tag.Equals("proyectilDestroy"))
