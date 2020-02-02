@@ -60,16 +60,6 @@ public class P_PlayerPlataformController : P_PhysicsObject
             animator.SetBool("special", special);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && grounded)
-        {
-            crouch = true;
-            animator.SetBool("crouch", crouch);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftControl) && grounded)
-        {
-            crouch = false;
-            animator.SetBool("crouch", crouch);
-        }
         if (move.x < 0)
         {
             spriteRenderer.flipX = true;
