@@ -19,7 +19,6 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
