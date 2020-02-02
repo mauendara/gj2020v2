@@ -10,7 +10,6 @@ public class BossController : MonoBehaviour
     public float bossThrowX = 1f;
     public float bossThrowY = 4f;
 
-    private bool jumpside = true;
     private Rigidbody2D rb;
     private Transform target;
 
@@ -57,11 +56,15 @@ public class BossController : MonoBehaviour
         }
         else if (col.gameObject.tag.Equals("bossPlataformL"))
         {
-            JumpRigth();
+            JumpLeft();
         }
         else if (col.gameObject.tag.Equals("bossPlataformR"))
         {
-            JumpLeft();
+            JumpRigth();
+        }
+        else if (col.gameObject.tag.Equals("Player"))
+        {
+            
         }
 
     }
