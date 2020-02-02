@@ -15,6 +15,7 @@ TagManager:
   - proyectilDestroy
   - P_enemy
   - Elevator
+  - DescText
   layers:
   - Default
   - TransparentFX
