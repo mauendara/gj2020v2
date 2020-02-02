@@ -8,6 +8,9 @@ TagManager:
   - proyectilDamage
   - Item
   - Exit
+  - bossPlataformR
+  - bossPlataformL
+  - bossPlataform
   layers:
   - Default
   - TransparentFX

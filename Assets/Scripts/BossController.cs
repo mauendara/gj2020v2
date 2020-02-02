@@ -5,44 +5,33 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     public float jumpForce, jumpCD, jump, xforce;
+    public float playerTriggerDistance = 0f;
+    public float bossSpeed = 5f;
+    public float bossThrowX = 1f;
+    public float bossThrowY = 4f;
 
     private bool jumpside = true;
     private Rigidbody2D rb;
-    private Transform transform;
+    private Transform target;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform> ();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        jump = jump - Time.deltaTime;
-        if (rb.velocity.y == 0)
+        float playerDistanceMagnitude = (transform.position - target.position).sqrMagnitude;
+        if (playerDistanceMagnitude <= playerTriggerDistance)
         {
-            rb.velocity = Vector2.zero;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, bossSpeed * Time.fixedDeltaTime);
         }
-        else
+        if (playerDistanceMagnitude <= 5)
         {
-            jump = jumpCD;
-        }
-        if (jump < 0 && rb.velocity.y == 0)
-        {
-            if (jumpside)
-            {
-                jumpside = false;
-                JumpRigth();
-
-            }
-            else
-            {
-                jumpside = true;
-                JumpLeft();
-
-            }
-            jump = jumpCD;
+            target.GetComponent<Rigidbody2D>().AddForce(transform.position - new Vector3(bossThrowX, bossThrowY, 0f));
         }
     }
 
@@ -62,9 +51,18 @@ public class BossController : MonoBehaviour
         {
             transform.localScale += new Vector3(0.1F, 0.1F, 0);
         }
-        if (col.gameObject.tag.Equals("proyectilNoDamage"))
+        else if (col.gameObject.tag.Equals("proyectilNoDamage"))
         {
             transform.localScale -= new Vector3(0.1F, 0.1F, 0);
         }
+        else if (col.gameObject.tag.Equals("bossPlataformL"))
+        {
+            JumpRigth();
+        }
+        else if (col.gameObject.tag.Equals("bossPlataformR"))
+        {
+            JumpLeft();
+        }
+
     }
 }
