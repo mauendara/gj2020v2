@@ -17,6 +17,13 @@ TagManager:
   - Elevator
   - Item1
   - Item2
+  - DescText
+  - Item_1
+  - item_2
+  - item_3
+  - item_4
+  - msg_item
+  - msg_text
   layers:
   - Default
   - TransparentFX
@@ -56,4 +63,7 @@ TagManager:
     locked: 0
   - name: 8
     uniqueID: 3334770353
+    locked: 0
+  - name: 8
+    uniqueID: 3016374169
     locked: 0
