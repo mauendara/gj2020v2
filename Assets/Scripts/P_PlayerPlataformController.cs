@@ -11,6 +11,7 @@ public class P_PlayerPlataformController : P_PhysicsObject
     private bool special, crouch;
     private Vector3 initialPosition;
 
+
     // Use this for initialization
     void Awake()
     {
@@ -18,6 +19,7 @@ public class P_PlayerPlataformController : P_PhysicsObject
         animator = GetComponent<Animator>();
         initialPosition = GetComponent<Rigidbody2D>().transform.position;
 
+        Debug.Log("started");
     }
 
     protected override void ComputeVelocity()

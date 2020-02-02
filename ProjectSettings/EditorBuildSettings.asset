@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Uno.unity
     guid: 27361a72e0d5c0445b243f7da6c8ee47
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dos.unity
     guid: 68d8502dbb8b1744f85b41bd0fc46046
+  - enabled: 1
+    path: Assets/Scenes/Negacion.unity
+    guid: 9c2075e866977724b95d41bc5b6c2194
   - enabled: 1
     path: Assets/Scenes/ira.unity
     guid: 7d3eda36b0bcb5d4d92629e46fc47ada
@@ -20,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Depresion.unity
     guid: 86fee8114bc5f2143a317bff73a687f9
-  - enabled: 1
-    path: Assets/Scenes/Negacion.unity
-    guid: 9c2075e866977724b95d41bc5b6c2194
   m_configObjects: {}
