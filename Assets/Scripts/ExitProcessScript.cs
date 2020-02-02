@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ExitProcessScript : MonoBehaviour
 {
-    [SerializeField] string nextScene;
-    [SerializeField] int maxChecksExpected;
+    public string nextScene;
+    public int maxChecksExpected;
     private bool isPlayerOver;
     public int numberOfChecks;
 
+    public ExitProcessScript instant;
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -32,12 +33,12 @@ public class ExitProcessScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         if (isPlayerOver)
         {
-            Debug.Log(Input.GetKeyDown(KeyCode.R));
+            Debug.Log(nextScene);
             if (Input.GetKeyDown(KeyCode.R)&&numberOfChecks==maxChecksExpected)
             {
                 //Change scene

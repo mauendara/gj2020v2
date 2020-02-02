@@ -11,6 +11,10 @@ TagManager:
   - bossPlataformR
   - bossPlataformL
   - bossPlataform
+  - proyectilNoDamage
+  - proyectilDestroy
+  - P_enemy
+  - Elevator
   layers:
   - Default
   - TransparentFX

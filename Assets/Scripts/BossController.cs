@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     public float jumpForce, jumpCD, jump, xforce;
+    public int HP = 5;
     public float playerTriggerDistance = 0f;
     public float bossSpeed = 5f;
     public float bossThrowX = 1f;
@@ -14,8 +15,10 @@ public class BossController : MonoBehaviour
     private Transform target;
 
     // Start is called before the first frame update
+    private ExitProcessScript exitProcessScript;
     void Start()
     {
+        exitProcessScript = GameObject.Find("Exit").GetComponent<ExitProcessScript> ();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -46,13 +49,38 @@ public class BossController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.tag.Equals("proyectilNoDamage"))
+        {
+            if (HP < 8)
+            {
+                HP++;
+                transform.localScale += new Vector3(0.1F, 0.1F, 0);
+            }
+            else
+            {
+                transform.gameObject.SetActive(false);
+                exitProcessScript.nextScene = "Negacion";
+            }
+        }
         if (col.gameObject.tag.Equals("proyectilDamage"))
         {
-            transform.localScale += new Vector3(0.1F, 0.1F, 0);
+            if (HP > 0)
+            {
+                Destroy(col.gameObject);
+                HP--;
+                transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+            }
+            else if (HP == 0)
+            {
+                Destroy(col.gameObject);
+                transform.gameObject.SetActive(false);
+                exitProcessScript.nextScene = "Negociacion";
+                Debug.Log(exitProcessScript.nextScene);
+            }
         }
-        else if (col.gameObject.tag.Equals("proyectilNoDamage"))
+        if (col.gameObject.tag.Equals("proyectilDestroy"))
         {
-            transform.localScale -= new Vector3(0.1F, 0.1F, 0);
+            transform.gameObject.SetActive(false);
         }
         else if (col.gameObject.tag.Equals("bossPlataformL"))
         {
