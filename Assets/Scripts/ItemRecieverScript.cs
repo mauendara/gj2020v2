@@ -17,7 +17,7 @@ public class ItemRecieverScript : MonoBehaviour
     {
         isOverExpectedObject = 0;
         hasRecievedItem = false;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
         exit = GameObject.FindGameObjectWithTag("Exit");
         msg_box = GameObject.FindWithTag("msg_text").GetComponent<Text>();
     }
@@ -25,16 +25,16 @@ public class ItemRecieverScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isOverExpectedObject==1)
+        if (isOverExpectedObject==1 && Input.GetKeyDown(KeyCode.E))
         {
             //RecieveObject
             hasRecievedItem = true;
             isOverExpectedObject++;
-            Debug.Log(isOverExpectedObject);
             exit.GetComponent<ExitProcessScript>().numberOfChecks++;
 
             //IfPossibleGiveObjectToPlayer
             try {
+                transform.GetChild(0).GetComponent<PickUpItemScript>().isBeingCarried = true;
                 transform.GetChild(0).transform.parent = player;
             }
             catch (UnityException ex){}

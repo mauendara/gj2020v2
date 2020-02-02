@@ -15,6 +15,9 @@ TagManager:
   - proyectilDestroy
   - P_enemy
   - Elevator
+  - Item1
+  - Item2
+  - DescText
   - Item_1
   - item_2
   - item_3
@@ -57,6 +60,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 8
+    uniqueID: 3334770353
     locked: 0
   - name: 8
     uniqueID: 3016374169
